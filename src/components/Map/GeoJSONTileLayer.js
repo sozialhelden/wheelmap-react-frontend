@@ -44,14 +44,24 @@ const TileLayer = L.TileLayer;
 class GeoJSONTileLayer extends TileLayer {
   _idsToShownLayers = {};
   _loadedTileUrls = {};
+  _cacheBuster = '';
   highlightedMarkerIds = [];
   highlightLayer: L.Layer = null;
 
-  constructor(tileUrl: string, options: {}) {
+  constructor(tileUrl: string, options: { refreshFrequency?: number }) {
     super(tileUrl, options);
     this._layerGroup = options.layerGroup || L.layerGroup();
     options.featureCache.addEventListener('change', this._onCachedFeatureChanged);
     options.featureCache.addEventListener('add', this._onCachedFeatureAdded);
+
+    if (options.refreshFrequency) {
+      this._taskId = setInterval(() => {
+        console.log(`Refreshing cache after ${options.refreshFrequency}`);
+        this._clear();
+        this._cacheBuster = String(Math.random());
+        this.redraw();
+      }, options.refreshFrequency);
+    }
   }
 
   _onCachedFeatureChanged = (event: CustomEvent & { feature: Feature }) => {
@@ -110,6 +120,19 @@ class GeoJSONTileLayer extends TileLayer {
     return this._filterFeatureCollection(featureCollection, this.options.filter || (i => true));
   }
 
+  _clear() {
+    if (this._tiles) {
+      Object.keys(this._tiles).forEach(k => this._removeTile(k));
+    }
+    Object.keys(this._idsToShownLayers).forEach(id => {
+      this._layerGroup.removeLayer(this._idsToShownLayers[id]);
+    });
+    this._loadedTileUrls = {};
+    this._tiles = {};
+    this._tilesToLoad = 0;
+    this._idsToShownLayers = {};
+  }
+
   _reset() {
     // console.log("Resetting tile layer, emptying _idsToShownLayers");
     if (this._tiles) {
@@ -160,6 +183,7 @@ class GeoJSONTileLayer extends TileLayer {
       x: coords.x,
       y: coords.y,
       z: this._getZoomForUrl(),
+      c: this._cacheBuster,
     };
     data.bbox = geoTileToBbox(data);
     if (this._map && !this._map.options.crs.infinite) {

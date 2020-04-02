@@ -14,7 +14,10 @@ import { currentLocales } from '../../lib/i18n';
 import LeafletLocateControl from './L.Control.Locate';
 import HighlightableMarker from './HighlightableMarker';
 import { isWheelmapFeature, hrefForFeature } from '../../lib/Feature';
-import { CategoryStrings as EquipmentCategoryStrings } from '../../lib/EquipmentInfo';
+import {
+  CategoryStrings as EquipmentCategoryStrings,
+  maxEquipmentInformationLifetime,
+} from '../../lib/EquipmentInfo';
 
 import {
   isWheelchairAccessible,
@@ -571,6 +574,7 @@ export default class Map extends React.Component<Props, State> {
 
     this.equipmentTileLayer = new GeoJSONTileLayer(tileUrl, {
       featureCache: equipmentInfoCache,
+      refreshFrequency: maxEquipmentInformationLifetime / 2,
       maxNativeZoom: 14,
       layerGroup: markerClusterGroup,
       featureCollectionFromResponse: accessibilityCloudFeatureCollectionFromResponse,

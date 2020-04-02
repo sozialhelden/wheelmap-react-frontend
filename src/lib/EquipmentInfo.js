@@ -118,10 +118,13 @@ export function equipmentStatusTitle(isWorking: ?boolean, isOutdated: boolean) {
   }[String(isOutdated ? undefined : isWorking)];
 }
 
+const twoHoursInMilliseconds = 1000 * 60 * 60 * 2;
+
+export const maxEquipmentInformationLifetime = twoHoursInMilliseconds;
+
 export function isExistingInformationOutdated(lastUpdate: ?Date) {
   if (!lastUpdate) return false;
-  const twoHoursInMilliseconds = 1000 * 60 * 60 * 2;
-  return new Date() - lastUpdate > twoHoursInMilliseconds;
+  return new Date() - lastUpdate > maxEquipmentInformationLifetime;
 }
 
 export function isEquipmentAccessible(properties: ?EquipmentInfoProperties): ?YesNoLimitedUnknown {

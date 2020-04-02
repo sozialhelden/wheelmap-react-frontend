@@ -11,6 +11,7 @@
     "@babel/runtime-corejs3": "^7.6.3",
     "@elastic/apm-rum": "^4.3.0",
     "@hypo808/elastic-apm-sourcemap-webpack-plugin": "^1.5.2",
+    "@sozialhelden/fetch-cache": "^2.0.1",
     "@sozialhelden/twelve-factor-dotenv": "^15.0.0",
     "acorn-dynamic-import": "^4.0.0",
     "async_hooks": "^1.0.0",
