@@ -51,7 +51,7 @@
     "leaflet-tilelayer-geojson": "^1.0.4",
     "leaflet.markercluster": "^1.0.4",
     "local-storage-fallback": "^4.1.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "marked": "^1.1.1",
     "mkdirp": "^0.5.1",
     "next": "^10.0.1",
