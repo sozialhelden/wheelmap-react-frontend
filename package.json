@@ -15,7 +15,7 @@
     "acorn-dynamic-import": "^4.0.0",
     "async_hooks": "^1.0.0",
     "browser-image-resizer": "^1.2.0",
-    "caniuse-lite": "^1.0.30001151",
+    "caniuse-lite": "^1.0.30001166",
     "cheerio": "^0.22.0",
     "compression": "^1.7.3",
     "core-js": "^3.6.5",
