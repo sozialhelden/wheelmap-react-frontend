@@ -80,7 +80,7 @@
     "styled-components": "^5.2.1",
     "swr": "^0.4.2",
     "ttag": "^1.7.22",
-    "ua-parser-js": "^0.7.22",
+    "ua-parser-js": "^0.7.23",
     "underscore.string": "^3.3.5",
     "unfetch": "^3.1.2",
     "uuid": "^8.3.1",
