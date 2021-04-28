@@ -62,7 +62,7 @@
     "lodash": "^4.17.20",
     "mapbox-gl": "^2.2.0",
     "mapbox-gl-leaflet": "0.0.14",
-    "marked": "^1.1.1",
+    "marked": "^2.0.0",
     "mkdirp": "^0.5.5",
     "next": "^10.0.7",
     "next-transpile-modules": "^5.0.0",
